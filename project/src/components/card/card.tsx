@@ -1,4 +1,11 @@
-function Card(): JSX.Element {
+type mocks = {
+  id: number,
+  name: string,
+  price: number
+}
+
+function Card(mocks: mocks): JSX.Element {
+  //const offers = mocks;
   return (
     <article className="cities__place-card place-card">
       <div className="place-card__mark">

@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {AppRoute} from '../const/const';
 import MainPage from '../main-page/main-page';
 import Login from '../login/login';
@@ -7,11 +8,19 @@ import Card from '../card/card';
 import NotFound from '../not-found/not-found';
 import PrivateRoute from '../private-route/privet-route';
 
+type mocks = {
+  id: number,
+  name: string,
+  price: number
+}
+
 type AppMainProps = {
-  placesCount: number;
+  placesCount: number,
+  mocks: mocks
 };
 
-function App({placesCount} : AppMainProps): JSX.Element {
+function App({placesCount, mocks} : AppMainProps): JSX.Element {
+  const offers = mocks;
   return (
     <BrowserRouter>
       <Switch>
@@ -21,7 +30,9 @@ function App({placesCount} : AppMainProps): JSX.Element {
         <Route path={AppRoute.Login} exact>
           <Login/>
         </Route>
-        <Route path={AppRoute.Offer} exact component={Card} />
+        <Route path={AppRoute.Offer} exact>
+          <Card {...offers}/>
+        </Route>
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
